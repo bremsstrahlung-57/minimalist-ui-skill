@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en" data-theme="gruvbox" data-mode="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Textured minimal — neutral reference</title>
+  <script>
+    (() => {
+      const themes = {
+        gruvbox: ['light', 'dark'], 'tokyo-night': ['dark'], 'tokyo-storm': ['dark'], 'tokyo-day': ['light'],
+        'catppuccin-latte': ['light'], 'catppuccin-mocha': ['dark'], 'rose-pine': ['dark'],
+        'rose-pine-dawn': ['light'], nord: ['dark'], everforest: ['light', 'dark']
+      };
+      const root = document.documentElement;
+      const system = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      try {
+        const saved = JSON.parse(localStorage.getItem('textured-minimal-theme') || '{}');
+        const theme = themes[saved.theme] ? saved.theme : 'gruvbox';
+        const mode = themes[theme].includes(saved.mode) ? saved.mode : (themes[theme].includes(system) ? system : themes[theme][0]);
+        root.dataset.theme = theme; root.dataset.mode = mode;
+      } catch { root.dataset.theme = 'gruvbox'; root.dataset.mode = system; }
+    })();
+  </script>
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="base.css">
+  <style>
+    body { padding-bottom: 5rem; }
+    main { display: grid; gap: 2rem; }
+    section { min-width: 0; }
+    .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 1.5rem; }
+    .demo-form { display: grid; gap: 1rem; max-width: 36rem; }
+    #ambient { z-index: 0; opacity: .1; }
+    .shell { z-index: 1; }
+    @media (max-width: 600px) { body { padding-bottom: 11rem; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <canvas id="ambient" class="ambient" aria-hidden="true"></canvas>
+  <div class="shell">
+    <div class="page-frame">
+      <header>
+        <nav class="nav" aria-label="Example navigation"><a href="#main" aria-current="page">Sample page</a><a href="#form">Form</a><a href="#data">Data</a></nav>
+        <p class="meta">NEUTRAL REFERENCE · PLACEHOLDER CONTENT</p>
+        <h1>Useful things, clearly arranged.</h1>
+        <p>This plain HTML page demonstrates adaptable visual parts. Replace all example copy and values with real project content.</p>
+      </header>
+      <main id="main">
+        <section aria-labelledby="texture-heading">
+          <h2 id="texture-heading" class="section-title">Small details, chosen on purpose</h2>
+          <pre class="ascii-divider" aria-hidden="true">* - - - - - - - - - - - - - - - - - - *</pre>
+          <ul class="terminal-list"><li>Visible states, useful labels, no hidden action.</li><li class="meta">Short metadata belongs below the important information.</li></ul>
+          <div class="demo-grid">
+            <div class="panel"><h3>Loading example</h3><progress value="42" max="100" aria-label="Example task progress">42%</progress> <span class="ascii-progress" aria-hidden="true">[####------]</span></div>
+            <div class="callout"><h3>404 example</h3><p>The requested sample item was not found.</p><a class="link" href="#main">Return to the example page</a></div>
+          </div>
+        </section>
+        <section id="form" aria-labelledby="form-heading">
+          <h2 id="form-heading" class="section-title">A small form</h2>
+          <form class="demo-form" action="#form" method="get">
+            <div class="field"><label for="sample-name">Display name</label><input id="sample-name" name="name" autocomplete="name" aria-describedby="name-help"><span id="name-help" class="meta">Example field; submitted value stays in the URL.</span></div>
+            <div class="field"><label for="sample-choice">Preferred option</label><select id="sample-choice" name="choice"><option>First option</option><option>Second option</option></select></div>
+            <button class="button button--primary" type="submit">Save example</button>
+          </form>
+        </section>
+        <section id="data" aria-labelledby="data-heading">
+          <h2 id="data-heading" class="section-title">A table with local scrolling</h2>
+          <div class="table-scroll" role="region" aria-label="Example records" tabindex="0">
+            <table><caption class="meta">Placeholder records</caption><thead><tr><th scope="col">Item</th><th scope="col">Status</th><th scope="col">Updated</th></tr></thead><tbody><tr><th scope="row">Sample A</th><td><span class="tag">Ready</span></td><td>Today</td></tr><tr><th scope="row">Sample B</th><td><span class="tag">Pending</span></td><td>Yesterday</td></tr></tbody></table>
+          </div>
+        </section>
+        <section aria-labelledby="dialog-heading">
+          <h2 id="dialog-heading" class="section-title">Dialog sample</h2>
+          <button class="button" id="open-dialog" type="button">Open example dialog</button>
+          <dialog id="sample-dialog" class="dialog-surface" aria-labelledby="dialog-title"><h2 id="dialog-title">Example dialog</h2><p>This is placeholder copy. Escape closes the dialog and returns focus.</p><button class="button" id="close-dialog" type="button">Close</button></dialog>
+        </section>
+      </main>
+    </div>
+  </div>
+  <footer class="footer-bar" aria-label="Display settings">
+    <label for="theme-choice">Theme</label>
+    <select id="theme-choice" aria-label="Theme and appearance">
+      <option value="gruvbox|system">Gruvbox · system</option><option value="gruvbox|light">Gruvbox · light</option><option value="gruvbox|dark">Gruvbox · dark</option>
+      <option value="tokyo-night|dark">Tokyo Night</option><option value="tokyo-storm|dark">Tokyo Storm</option><option value="tokyo-day|light">Tokyo Day</option>
+      <option value="catppuccin-latte|light">Catppuccin Latte</option><option value="catppuccin-mocha|dark">Catppuccin Mocha</option>
+      <option value="rose-pine|dark">Rose Pine</option><option value="rose-pine-dawn|light">Rose Pine Dawn</option><option value="nord|dark">Nord</option>
+      <option value="everforest|light">Everforest light</option><option value="everforest|dark">Everforest dark</option>
+    </select>
+    <label for="ambient-mode">Ambient mode</label>
+    <select id="ambient-mode"><option value="life">Game of Life</option><option value="rule30">Rule 30</option><option value="rule90">Rule 90</option><option value="rule110">Rule 110</option><option value="ant">Langton's ant</option><option value="noise">ASCII noise</option><option value="flow">Flow field</option><option value="halftone">Halftone</option><option value="stars">Character starfield</option><option value="rain">Glyph rain</option><option value="truchet">Truchet tiles</option></select>
+    <button class="button" type="button" id="pause-ambient" aria-pressed="false">Pause background</button>
+  </footer>
+  <script type="module">
+    import { create } from './ambient.js';
+    const root = document.documentElement, themePicker = document.querySelector('#theme-choice');
+    const systemMode = () => matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const saveTheme = (mode = root.dataset.mode) => { try { localStorage.setItem('textured-minimal-theme', JSON.stringify({ theme: root.dataset.theme, mode })); } catch {} }; 
+    const themeValue = root.dataset.theme === 'gruvbox' && root.dataset.mode === systemMode() ? 'gruvbox|system' : `${root.dataset.theme}|${root.dataset.mode}`;
+    themePicker.value = [...themePicker.options].some(option => option.value === themeValue) ? themeValue : `${root.dataset.theme}|${root.dataset.mode}`;
+    themePicker.addEventListener('change', () => { const [theme, requested] = themePicker.value.split('|'); root.dataset.theme = theme; root.dataset.mode = requested === 'system' ? systemMode() : requested; saveTheme(requested); updateColours(); });
+    const canvas = document.querySelector('#ambient'), pause = document.querySelector('#pause-ambient');
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const palette = () => { const styles = getComputedStyle(root); return [styles.getPropertyValue('--accent').trim(), styles.getPropertyValue('--muted').trim()]; };
+    const core = create(canvas, { mode: document.querySelector('#ambient-mode').value, colours: palette(), reducedMotion });
+    const updateColours = () => core.setColours(palette());
+    document.querySelector('#ambient-mode').addEventListener('change', event => core.setMode(event.target.value));
+    let manuallyPaused = false;
+    const updatePause = () => { const value = document.hidden || reducedMotion || manuallyPaused; core.setPaused(value); pause.setAttribute('aria-pressed', String(manuallyPaused)); pause.textContent = manuallyPaused || reducedMotion ? 'Resume background' : 'Pause background'; pause.disabled = reducedMotion; if (reducedMotion) pause.textContent = 'Background paused (reduced motion)'; };
+    pause.addEventListener('click', () => { manuallyPaused = !manuallyPaused; updatePause(); });
+    const visibility = () => updatePause();
+    document.addEventListener('visibilitychange', visibility);
+    matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => { if (themePicker.value.endsWith('|system')) { root.dataset.mode = event.matches ? 'dark' : 'light'; saveTheme('system'); updateColours(); } });
+    updatePause();
+    document.querySelector('#open-dialog').addEventListener('click', () => document.querySelector('#sample-dialog').showModal());
+    document.querySelector('#close-dialog').addEventListener('click', () => document.querySelector('#sample-dialog').close());
+    addEventListener('pagehide', () => { document.removeEventListener('visibilitychange', visibility); core.destroy(); }, { once: true });
+  </script>
+</body>
+</html>
