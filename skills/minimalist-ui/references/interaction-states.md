@@ -27,6 +27,10 @@ Use native input types and relevant autocomplete. Put errors beside fields and a
 
 Use semantic links, buttons, selects, and native dialog behavior when suitable. Show focus on every interactive element and ensure it is not clipped. Keep keyboard order aligned with visual task order. Return focus to the opener after closing an overlay, or to the next logical control if it no longer exists. Do not steal focus for routine updates. Use live announcements sparingly for meaningful async changes, not decorative effects or every keystroke.
 
+## Fast flows
+
+In repeated choose-one flows, never drop input typed during a transition: flush the pending advance, then handle the key. Direction-aware slides become a short swap under reduced motion. Number or letter shortcuts are acceptable here only as an accelerator, shown as keycaps, hidden on `(hover: none)`, ignored inside fields and open dialogs. A two-step "tap again to clear" is enough for a recoverable reset. Loading lines name steps that really run; skip them when the work is instant.
+
 ## Motion budget
 
 Complete the static interface before adding motion. Small color/opacity feedback can be brief; entrances are optional, once-only, and never delay access. Reduced motion removes travel, flicker, rolling bands, and decorative loops while retaining state feedback. Do not require a boot sequence. Motion must not conceal missing content or animate layout on hover.

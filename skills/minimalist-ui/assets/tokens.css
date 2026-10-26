@@ -1,63 +1,77 @@
-/* Role tokens use palette colours from each named community theme. */
+/* Role tokens use palette colours from each named community theme.
+   --cat-1..6 are optional category slots (not hues) for charts, tags and series; always pair them with a label or glyph. */
 :root,
 [data-theme="gruvbox"] {
   --page: #fbf1c7; --surface: #f2e5bc; --ink: #3c3836; --muted: #665c54; --faint: #665c54;
   --line: #d5c4a1; --accent: #076678; --accent-soft: #d5c4a1; --danger: #9d0006; --ok: #79740e; --warn: #b57614;
+  --cat-1: #076678; --cat-2: #79740e; --cat-3: #b57614; --cat-4: #af3a03; --cat-5: #8f3f71; --cat-6: #427b58;
   color-scheme: light;
 }
 [data-theme="gruvbox"][data-mode="dark"] {
   --page: #282828; --surface: #3c3836; --ink: #ebdbb2; --muted: #bdae93; --faint: #bdae93;
   --line: #665c54; --accent: #83a598; --accent-soft: #504945; --danger: #fb4934; --ok: #b8bb26; --warn: #fabd2f;
+  --cat-1: #83a598; --cat-2: #b8bb26; --cat-3: #fabd2f; --cat-4: #fe8019; --cat-5: #d3869b; --cat-6: #8ec07c;
   color-scheme: dark;
 }
 [data-theme="tokyo-night"][data-mode="dark"] {
   --page: #1a1b26; --surface: #24283b; --ink: #c0caf5; --muted: #a9b1d6; --faint: #9aa5ce;
   --line: #414868; --accent: #7aa2f7; --accent-soft: #292e42; --danger: #f7768e; --ok: #9ece6a; --warn: #e0af68;
+  --cat-1: #7aa2f7; --cat-2: #9ece6a; --cat-3: #e0af68; --cat-4: #ff9e64; --cat-5: #bb9af7; --cat-6: #7dcfff;
   color-scheme: dark;
 }
 [data-theme="tokyo-storm"][data-mode="dark"] {
   --page: #24283b; --surface: #1f2335; --ink: #c0caf5; --muted: #a9b1d6; --faint: #9aa5ce;
   --line: #414868; --accent: #7aa2f7; --accent-soft: #292e42; --danger: #f7768e; --ok: #9ece6a; --warn: #e0af68;
+  --cat-1: #7aa2f7; --cat-2: #9ece6a; --cat-3: #e0af68; --cat-4: #ff9e64; --cat-5: #bb9af7; --cat-6: #7dcfff;
   color-scheme: dark;
 }
 [data-theme="tokyo-day"][data-mode="light"] {
   --page: #e1e2e7; --surface: #e1e2e7; --ink: #3760bf; --muted: #3760bf; --faint: #3760bf;
   --line: #a8aecb; --accent: #2e7de9; --accent-soft: #c4c8da; --danger: #f52a65; --ok: #587539; --warn: #8c6c3e;
+  --tint: 0%;
+  --cat-1: #2e7de9; --cat-2: #587539; --cat-3: #8c6c3e; --cat-4: #b15c00; --cat-5: #9854f1; --cat-6: #007197;
   color-scheme: light;
 }
 [data-theme="catppuccin-latte"][data-mode="light"] {
   --page: #eff1f5; --surface: #e6e9ef; --ink: #4c4f69; --muted: #5c5f77; --faint: #5c5f77;
   --line: #bcc0cc; --accent: #1e66f5; --accent-soft: #dce0e8; --danger: #d20f39; --ok: #40a02b; --warn: #df8e1d;
+  --cat-1: #1e66f5; --cat-2: #40a02b; --cat-3: #df8e1d; --cat-4: #fe640b; --cat-5: #8839ef; --cat-6: #179299;
   color-scheme: light;
 }
 [data-theme="catppuccin-mocha"][data-mode="dark"] {
   --page: #1e1e2e; --surface: #313244; --ink: #cdd6f4; --muted: #a6adc8; --faint: #bac2de;
   --line: #585b70; --accent: #89b4fa; --accent-soft: #45475a; --danger: #f38ba8; --ok: #a6e3a1; --warn: #f9e2af;
+  --cat-1: #89b4fa; --cat-2: #a6e3a1; --cat-3: #f9e2af; --cat-4: #fab387; --cat-5: #cba6f7; --cat-6: #94e2d5;
   color-scheme: dark;
 }
 [data-theme="rose-pine"][data-mode="dark"] {
   --page: #191724; --surface: #1f1d2e; --ink: #e0def4; --muted: #908caa; --faint: #908caa;
   --line: #403d52; --accent: #c4a7e7; --accent-soft: #26233a; --danger: #eb6f92; --ok: #31748f; --warn: #f6c177;
+  --cat-1: #9ccfd8; --cat-2: #31748f; --cat-3: #f6c177; --cat-4: #ebbcba; --cat-5: #c4a7e7; --cat-6: #eb6f92;
   color-scheme: dark;
 }
 [data-theme="rose-pine-dawn"][data-mode="light"] {
   --page: #faf4ed; --surface: #fffaf3; --ink: #575279; --muted: #575279; --faint: #575279;
   --line: #dfdad9; --accent: #907aa9; --accent-soft: #f2e9e1; --danger: #b4637a; --ok: #286983; --warn: #ea9d34;
+  --cat-1: #56949f; --cat-2: #286983; --cat-3: #ea9d34; --cat-4: #d7827e; --cat-5: #907aa9; --cat-6: #b4637a;
   color-scheme: light;
 }
 [data-theme="nord"][data-mode="dark"] {
   --page: #2e3440; --surface: #3b4252; --ink: #eceff4; --muted: #d8dee9; --faint: #d8dee9;
   --line: #4c566a; --accent: #88c0d0; --accent-soft: #434c5e; --danger: #bf616a; --ok: #a3be8c; --warn: #ebcb8b;
+  --cat-1: #81a1c1; --cat-2: #a3be8c; --cat-3: #ebcb8b; --cat-4: #d08770; --cat-5: #b48ead; --cat-6: #88c0d0;
   color-scheme: dark;
 }
 [data-theme="everforest"][data-mode="light"] {
   --page: #fdf6e3; --surface: #f4f0d9; --ink: #5c6a72; --muted: #5c6a72; --faint: #5c6a72;
   --line: #d3c6aa; --accent: #8da101; --accent-soft: #e6e2cc; --danger: #f85552; --ok: #8da101; --warn: #dfa000;
+  --cat-1: #3a94c5; --cat-2: #8da101; --cat-3: #dfa000; --cat-4: #f57d26; --cat-5: #df69ba; --cat-6: #35a77c;
   color-scheme: light;
 }
 [data-theme="everforest"][data-mode="dark"] {
   --page: #2d353b; --surface: #343f44; --ink: #d3c6aa; --muted: #a7c080; --faint: #a7c080;
   --line: #4f585e; --accent: #a7c080; --accent-soft: #3d484d; --danger: #e67e80; --ok: #a7c080; --warn: #dbbc7f;
+  --cat-1: #7fbbb3; --cat-2: #a7c080; --cat-3: #dbbc7f; --cat-4: #e69875; --cat-5: #d699b6; --cat-6: #83c092;
   color-scheme: dark;
 }
 
@@ -65,4 +79,6 @@
   --font-mono: ui-monospace, "Cascadia Mono", "Segoe UI Mono", monospace;
   --space-1: .25rem; --space-2: .5rem; --space-3: .75rem; --space-4: 1rem;
   --space-6: 1.5rem; --space-8: 2rem; --frame-weight: 3px; --page-gutter: clamp(1rem, 4vw, 2.5rem);
+  --step-display: clamp(2.5rem, 8vw, 6.5rem); --step-title: clamp(1.75rem, 4vw, 3rem);
+  --press: 3px; --tint: 12%;
 }

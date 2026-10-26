@@ -2,6 +2,8 @@
 
 Use three independent choices: theme family (`data-theme`), light/dark appearance (`data-mode`), and system preference when no saved mode exists. `assets/tokens.css` implements the role tokens `--page`, `--surface`, `--ink`, `--muted`, `--faint`, `--line`, `--accent`, `--accent-soft`, `--danger`, `--ok`, and `--warn`. Keep roles stable when mapping into the project's existing theme system. A role's hue may change; its job must not.
 
+`--cat-1` to `--cat-6` are optional category slots for series, tags, and choice tints, taken from each family's own palette steps. They are not text colours: use `--ink` on a `color-mix` of the slot (`--tint`, 12%; 0% for Tokyo Day) and outline filled shapes in `--ink`, because several light-theme slots fall under 3:1 against `--page`. Add a slot only from a published palette step.
+
 Included palettes are Gruvbox (default; light and dark), Tokyo Night (Night and Storm dark; Day light), Catppuccin (Mocha dark; Latte light), Rose Pine (main dark; Dawn light), Nord (dark only), and Everforest (light and dark). Do not invent modes for families without a published variant. Theme names use `data-theme`; mode uses `data-mode="light|dark"`.
 
 ## Applying before paint

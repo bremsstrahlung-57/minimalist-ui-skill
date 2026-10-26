@@ -36,6 +36,7 @@ Both flavors are opt-in, clearly switchable off, and off by default. The base vi
 
 - **CRT:** use static scanlines, restrained accent glow, and optional rounded screen corners. Never flicker, roll a band, clip content, obscure focus, or glow over long text. Turning it off restores ordinary clear text and corners. Under reduced motion, remove any animation; preferably keep scanlines static or disable them.
 - **Win98:** use purposeful modal/help/error windows with a grey face, dark readable text, a blue title strip, square geometry, and raised/inset button treatment. Preserve native dialog semantics, Escape, focus containment/restoration, and honest controls. Do not simulate operating-system errors for a real failure.
-- A single bitmap-font headline or subtle grain may be added if legible and low-cost. Do not change the body font or add grain by default.
+- A single bitmap-font headline or subtle grain may be added if legible and low-cost. Do not change the body font or add grain by default. `assets/base.css` has an opt-in `.grain` class: add it to the root, it multiplies on light modes and screens at lower opacity on dark modes, and it never intercepts input.
+- Halftone dots (`.halftone`, bipolar fills, `dotted-corner`) are the data-friendly texture; prefer them over canvas where the page shows numbers.
 
 Never stack every effect. The TEXTURE dial decides how many visual details the task can support.

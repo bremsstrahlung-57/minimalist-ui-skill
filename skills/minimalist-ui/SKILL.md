@@ -82,6 +82,11 @@ task.
   labels.
 - Use one distinctive motif tied to the task. Prefer restraint over stacking the
   frame, canvas, CRT, animation, grain, and ASCII art in one view.
+- Let scale contrast carry hierarchy: one oversized headline with one emphasised
+  word against small uppercase labels. When the content has numbers, categories,
+  or a position, draw that real data as the focal motif before reaching for
+  decoration. Colour a category only alongside a label, glyph, or outline.
+  `references/craft.md` has the full set of moves and what not to copy.
 
 ## Build in layers
 
@@ -145,6 +150,7 @@ Read only the material relevant to the work. Detect the stack before opening
 | --- | --- |
 | `references/page-types.md` | Choosing composition and dials for a particular kind of page. |
 | `references/themes.md` | Selecting or adding a theme, mapping roles, or checking contrast. |
+| `references/craft.md` | Raising polish: headline scale, stat and bipolar data surfaces, segmented progress, category colour, tactile primary action, choice cards, share cards, copy voice. |
 | `references/texture.md` | Considering the ambient canvas, ASCII, border language, micro-interactions, CRT, or Win98 details. |
 | `references/components.md` | Implementing common controls, content patterns, tables, or component states. |
 | `references/interaction-states.md` | Building forms, asynchronous feedback, menus, dialogs, keyboard behaviour, or motion. |

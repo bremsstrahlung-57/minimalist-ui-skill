@@ -11,6 +11,8 @@ Use page type as a starting point, not a template. Choose the dials, width, dens
 | Landing or product page | 7 / 4 / 4 | State the real offer and audience quickly; make evidence, details, and primary action easy to find | No invented logo walls, testimonials, or stats |
 | Directory or community | 4 / 6 / 2 | Browse/search only when useful; clear item identity, filters, and contribution route | No fake activity or decorative counters |
 | Personal site | 7 / 4 / 4 | Let the person's actual work, interests, or writing determine the sections | No default project/books/blog/GitHub section set |
+| Quiz, assessment, wizard | 4 / 5 / 3 | One question per view, segmented progress strip, keycap-labelled choices, live preview that stays honest until there is enough data, resume support | No fake analysis theatre; shortcuts never the only path |
+| Result or report | 5 / 6 / 3 | Ruled meta line, one oversized title, the real data visual beside its numbers, prose after, then share or next action; export card uses the same tokens | One playful touch at most; every figure is real text |
 | Tool or editor | 3 / 7 / 2 | Keep the working surface dominant; group related controls and provide direct status | Ambient motion off around precision work |
 
 Adjust values to user preference. If multiple contexts exist, set values per screen instead of averaging into one style. Higher density means efficient hierarchy and scannable grouping, not smaller essential type. Higher texture means more distinctive strokes, glyphs, and surfaces, not a pile of effects.

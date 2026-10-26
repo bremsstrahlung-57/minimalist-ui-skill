@@ -26,6 +26,8 @@
   <link rel="stylesheet" href="base.css">
   <style>
     body { padding-bottom: 5rem; }
+    header { margin-bottom: 2rem; }
+    header .nav { margin-bottom: 1.5rem; }
     main { display: grid; gap: 2rem; }
     section { min-width: 0; }
     .demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 1.5rem; }
@@ -42,9 +44,10 @@
     <div class="page-frame">
       <header>
         <nav class="nav" aria-label="Example navigation"><a href="#main" aria-current="page">Sample page</a><a href="#form">Form</a><a href="#data">Data</a></nav>
-        <p class="meta">NEUTRAL REFERENCE · PLACEHOLDER CONTENT</p>
-        <h1>Useful things, clearly arranged.</h1>
+        <ul class="rule-labels kicker"><li>Neutral reference</li><li>Placeholder content</li><li>Four sections</li></ul>
+        <h1 class="display">Useful things, <em>clearly</em> arranged.</h1>
         <p>This plain HTML page demonstrates adaptable visual parts. Replace all example copy and values with real project content.</p>
+        <p><a class="button button--primary" href="#numbers">Jump to the data</a></p>
       </header>
       <main id="main">
         <section aria-labelledby="texture-heading">
@@ -54,6 +57,31 @@
           <div class="demo-grid">
             <div class="panel"><h3>Loading example</h3><progress value="42" max="100" aria-label="Example task progress">42%</progress> <span class="ascii-progress" aria-hidden="true">[####------]</span></div>
             <div class="callout"><h3>404 example</h3><p>The requested sample item was not found.</p><a class="link" href="#main">Return to the example page</a></div>
+          </div>
+        </section>
+        <section id="numbers" aria-labelledby="numbers-heading">
+          <h2 id="numbers-heading" class="section-title">Numbers that read at a glance</h2>
+          <div class="stats">
+            <div class="stat"><p class="stat__value">76<small>%</small></p><p class="stat__label">Example completion</p><div class="meter" style="--v:76%" aria-hidden="true"></div></div>
+            <div class="stat"><p class="stat__value">93<small>%</small></p><p class="stat__label">Example agreement</p><div class="meter" style="--v:93%" aria-hidden="true"></div></div>
+            <div class="stat"><p class="stat__value">1 in 14</p><p class="stat__label">Placeholder rarity</p></div>
+          </div>
+          <div class="bipolar" style="--l:52%; --r:17%; --cl:var(--cat-1); --cr:var(--cat-4)">
+            <div class="bipolar__head"><b>Plan <span class="meta">52</span></b><span class="kicker">Plan / Play</span><b><span class="meta">17</span> Play</b></div>
+            <div class="bipolar__track" aria-hidden="true"></div>
+            <p class="bipolar__foot">Leans <b>Plan</b> by 35 <span class="delta delta--up">+4 since last time</span></p>
+          </div>
+          <p class="kicker" style="margin-top:1.5rem">Step 5 of 8</p>
+          <div class="strip" style="--n:8" role="img" aria-label="Progress: 4 of 8 steps answered, step 5 current">
+            <i class="is-filled" style="--cat:var(--cat-1)"></i><i class="is-filled" style="--cat:var(--cat-4)"></i><i class="is-neutral"></i><i class="is-filled" style="--cat:var(--cat-2)"></i><i aria-current="step"></i><i></i><i></i><i></i>
+          </div>
+          <div class="chips" role="group" aria-label="Example layers" style="display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:1.5rem">
+            <button class="chip" type="button" aria-pressed="true" style="--cat:var(--cat-2)"><i></i>Layer one</button>
+            <button class="chip" type="button" aria-pressed="false" style="--cat:var(--cat-5)"><i></i>Layer two</button>
+          </div>
+          <div class="demo-grid" role="group" aria-label="Example choices">
+            <button class="choice" type="button" aria-pressed="true" style="--cat:var(--cat-1)"><span class="keycap">1</span><span>First placeholder option, selected</span></button>
+            <button class="choice" type="button" aria-pressed="false" style="--cat:var(--cat-4)"><span class="keycap">2</span><span>Second placeholder option</span></button>
           </div>
         </section>
         <section id="form" aria-labelledby="form-heading">
@@ -112,6 +140,8 @@
     document.addEventListener('visibilitychange', visibility);
     matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => { if (themePicker.value.endsWith('|system')) { root.dataset.mode = event.matches ? 'dark' : 'light'; saveTheme('system'); updateColours(); } });
     updatePause();
+    document.querySelectorAll('.chip').forEach(chip => chip.addEventListener('click', () => chip.setAttribute('aria-pressed', String(chip.getAttribute('aria-pressed') !== 'true'))));
+    document.querySelectorAll('.choice').forEach((choice, _, all) => choice.addEventListener('click', () => all.forEach(other => other.setAttribute('aria-pressed', String(other === choice)))));
     document.querySelector('#open-dialog').addEventListener('click', () => document.querySelector('#sample-dialog').showModal());
     document.querySelector('#close-dialog').addEventListener('click', () => document.querySelector('#sample-dialog').close());
     addEventListener('pagehide', () => { document.removeEventListener('visibilitychange', visibility); core.destroy(); }, { once: true });
