@@ -1,27 +1,11 @@
 <!doctype html>
-<html lang="en" data-theme="gruvbox" data-mode="light">
+<html lang="en" data-theme="gruvbox" data-voice="nerd">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Textured minimal — neutral reference</title>
-  <script>
-    (() => {
-      const themes = {
-        gruvbox: ['light', 'dark'], 'tokyo-night': ['dark'], 'tokyo-storm': ['dark'], 'tokyo-day': ['light'],
-        'catppuccin-latte': ['light'], 'catppuccin-mocha': ['dark'], 'rose-pine': ['dark'],
-        'rose-pine-dawn': ['light'], nord: ['dark'], everforest: ['light', 'dark']
-      };
-      const root = document.documentElement;
-      const system = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      try {
-        const saved = JSON.parse(localStorage.getItem('textured-minimal-theme') || '{}');
-        const theme = themes[saved.theme] ? saved.theme : 'gruvbox';
-        const mode = themes[theme].includes(saved.mode) ? saved.mode : (themes[theme].includes(system) ? system : themes[theme][0]);
-        root.dataset.theme = theme; root.dataset.mode = mode;
-      } catch { root.dataset.theme = 'gruvbox'; root.dataset.mode = system; }
-    })();
-  </script>
+  <script src="head.js"></script>
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="base.css">
   <style>
@@ -115,6 +99,10 @@
       <option value="rose-pine|dark">Rose Pine</option><option value="rose-pine-dawn|light">Rose Pine Dawn</option><option value="nord|dark">Nord</option>
       <option value="everforest|light">Everforest light</option><option value="everforest|dark">Everforest dark</option>
     </select>
+    <label for="voice-choice">Voice</label>
+    <select id="voice-choice"><option value="nerd">Nerd</option><option value="neutral">Neutral</option><option value="professional">Professional</option></select>
+    <label for="type-choice">Type</label>
+    <select id="type-choice"><option value="">Voice default</option><option value="mono">Mono</option><option value="readable">Readable</option></select>
     <label for="ambient-mode">Ambient mode</label>
     <select id="ambient-mode"><option value="life">Game of Life</option><option value="rule30">Rule 30</option><option value="rule90">Rule 90</option><option value="rule110">Rule 110</option><option value="ant">Langton's ant</option><option value="noise">ASCII noise</option><option value="flow">Flow field</option><option value="halftone">Halftone</option><option value="stars">Character starfield</option><option value="rain">Glyph rain</option><option value="truchet">Truchet tiles</option></select>
     <button class="button" type="button" id="pause-ambient" aria-pressed="false">Pause background</button>
@@ -123,7 +111,12 @@
     import { create } from './ambient.js';
     const root = document.documentElement, themePicker = document.querySelector('#theme-choice');
     const systemMode = () => matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    const saveTheme = (mode = root.dataset.mode) => { try { localStorage.setItem('textured-minimal-theme', JSON.stringify({ theme: root.dataset.theme, mode })); } catch {} }; 
+    const store = (patch) => { try { const saved = JSON.parse(localStorage.getItem('textured-minimal-theme') || '{}') || {}; localStorage.setItem('textured-minimal-theme', JSON.stringify({ ...saved, ...patch })); } catch {} };
+    const saveTheme = (mode = root.dataset.mode) => store({ theme: root.dataset.theme, mode });
+    const voicePicker = document.querySelector('#voice-choice'), typePicker = document.querySelector('#type-choice');
+    voicePicker.value = root.dataset.voice; typePicker.value = root.dataset.type || '';
+    voicePicker.addEventListener('change', () => { root.dataset.voice = voicePicker.value; store({ voice: voicePicker.value }); updatePause(); });
+    typePicker.addEventListener('change', () => { if (typePicker.value) root.dataset.type = typePicker.value; else delete root.dataset.type; store({ type: typePicker.value || undefined }); });
     const themeValue = root.dataset.theme === 'gruvbox' && root.dataset.mode === systemMode() ? 'gruvbox|system' : `${root.dataset.theme}|${root.dataset.mode}`;
     themePicker.value = [...themePicker.options].some(option => option.value === themeValue) ? themeValue : `${root.dataset.theme}|${root.dataset.mode}`;
     themePicker.addEventListener('change', () => { const [theme, requested] = themePicker.value.split('|'); root.dataset.theme = theme; root.dataset.mode = requested === 'system' ? systemMode() : requested; saveTheme(requested); updateColours(); });
@@ -134,7 +127,7 @@
     const updateColours = () => core.setColours(palette());
     document.querySelector('#ambient-mode').addEventListener('change', event => core.setMode(event.target.value));
     let manuallyPaused = false;
-    const updatePause = () => { const value = document.hidden || reducedMotion || manuallyPaused; core.setPaused(value); pause.setAttribute('aria-pressed', String(manuallyPaused)); pause.textContent = manuallyPaused || reducedMotion ? 'Resume background' : 'Pause background'; pause.disabled = reducedMotion; if (reducedMotion) pause.textContent = 'Background paused (reduced motion)'; };
+    const updatePause = () => { pause.hidden = root.dataset.voice === 'professional'; const value = document.hidden || reducedMotion || manuallyPaused; core.setPaused(value); pause.setAttribute('aria-pressed', String(manuallyPaused)); pause.textContent = manuallyPaused || reducedMotion ? 'Resume background' : 'Pause background'; pause.disabled = reducedMotion; if (reducedMotion) pause.textContent = 'Background paused (reduced motion)'; };
     pause.addEventListener('click', () => { manuallyPaused = !manuallyPaused; updatePause(); });
     const visibility = () => updatePause();
     document.addEventListener('visibilitychange', visibility);

@@ -1,0 +1,24 @@
+/*! minimalist-ui v1.1.0 | MIT */
+(() => {
+  const modes = {
+    gruvbox: ['light', 'dark'], 'tokyo-night': ['dark'], 'tokyo-storm': ['dark'],
+    'tokyo-day': ['light'], 'catppuccin-latte': ['light'], 'catppuccin-mocha': ['dark'],
+    'rose-pine': ['dark'], 'rose-pine-dawn': ['light'], nord: ['dark'],
+    everforest: ['light', 'dark']
+  };
+  const voices = ['nerd', 'neutral', 'professional'];
+  const types = ['mono', 'readable'];
+  const root = document.documentElement;
+  const system = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem('textured-minimal-theme') || '{}') || {}; } catch {  }
+  const has = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+  const authored = has(modes, root.dataset.theme) ? root.dataset.theme : 'gruvbox';
+  const theme = has(modes, saved.theme) ? saved.theme : authored;
+  const wanted = modes[theme].includes(saved.mode) ? saved.mode : (modes[theme].includes(root.dataset.mode) ? root.dataset.mode : null);
+  root.dataset.theme = theme;
+  root.dataset.mode = wanted || (modes[theme].includes(system) ? system : modes[theme][0]);
+  root.dataset.voice = voices.includes(saved.voice) ? saved.voice : (voices.includes(root.dataset.voice) ? root.dataset.voice : 'nerd');
+  if (types.includes(saved.type)) root.dataset.type = saved.type;
+  else if (!types.includes(root.dataset.type)) delete root.dataset.type;
+})();

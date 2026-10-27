@@ -4,7 +4,7 @@ What made a well-regarded worked example (a quiz-and-results app with a risograp
 
 ## The moves
 
-1. **Scale contrast is the hierarchy.** One oversized headline (`.display`, tight tracking, weight 800) set against small uppercase `kicker` lines and ordinary body text. Emphasise one word with italic and the accent; at TEXTURE 6+ it may carry a faint offset shadow (an overprint hint). With a single typeface, size, weight, italic, and case do the work that extra families would otherwise do. Large display text only needs 3:1, so check the accent at that threshold, not 4.5:1.
+1. **Scale contrast is one route to hierarchy, not the only hero.** An oversized headline (`.display`, tight tracking, weight 800) against small uppercase `kicker` lines is a useful option; one italic, accent-coloured word is optional, not a signature requirement. At TEXTURE 6+ it may carry a faint offset shadow (an overprint hint). Keep one typeface: size, weight, alignment, and case can do the work without requiring italic emphasis. Large display text only needs 3:1, so check the accent at that threshold, not 4.5:1.
 2. **A ruled label line, not a badge row.** Two or three short facts (what, how many, how long) as `rule-labels`: each is a small kicker with a solid rule above it. It reads like a masthead and replaces chips, pills, and fake status text. Use only true facts.
 3. **One signature object that is real data.** The best screen had a hero visual that showed the product's actual model (a map with the user's position), not decoration. If the content has numbers, categories, or a position, draw that as the focal motif and let ASCII, canvas, and grain stay quiet. A decorative motif is the fallback, not the first choice.
 4. **Numbers get their own surface.** `stats`: a hairline-ruled grid of big value + tiny uppercase label (+ optional `meter`). `bipolar`: a bar that grows outward from a centre line for opposed pairs, each end named with its value, and a plain-language foot line ("Leans Plan by 35"). Halftone dots over the fill give data texture without a gradient. Real text always carries the value; the bar is the second channel.
@@ -16,6 +16,16 @@ What made a well-regarded worked example (a quiz-and-results app with a risograp
 10. **The share card is part of the design.** If a user can export or share a result, render it with the same tokens: wordmark and an id at the top, the title, the central visual, the key numbers, the strip, and the URL at the bottom, inside a ruled frame. It is the one place the brand travels without the page, so it must read at thumbnail size and contain real data only.
 11. **Voice.** Short, specific, a little dry: "Not a label. A location." beats "Welcome to our platform". Name the real cost and the real output ("~4 minutes", "no sign-up", "shareable card"). Label the interface with what it does. No filler superlatives; never invent proof.
 12. **Empty and loading states carry the same weight as success.** `empty-state` gets a real heading at title scale and a clear next action. If a result takes visible time, show a short `boot-log` of the real steps being run; if nothing real is happening, show nothing and go straight through.
+
+## Hero grammars
+
+Choose a grammar that makes the page's actual subject legible; do not default to the same oversized-title treatment. These are alternatives, not a checklist:
+
+- **Claim + evidence:** a concise statement paired with one real proof point, sample, or outcome.
+- **Question + answer object:** pose the user's real question, then show the thing that answers it (preview, result, or tool).
+- **Artifact + annotation:** lead with a useful product artifact, diagram, or image; use short labels to explain its meaningful parts.
+- **Metric + context:** make a consequential number or comparison the focal point, with the unit and interpretation immediately visible.
+- **Editorial lead + scene:** use a short, specific introductory paragraph beside a relevant image or tactile typographic detail; let the subject, not decoration, carry the scene.
 
 ## Behaviour that earned the polish
 
@@ -32,6 +42,10 @@ What made a well-regarded worked example (a quiz-and-results app with a risograp
 - A second and third typeface, circular glyph discs, rotated tape, drop shadows on every panel, a scrolling ticker, or a paper-grain default. They are the example's identity, not this skill's. Use them only if the user asks for that identity.
 - Fixed-colour text (`#1E1B18`) on category fills. Use tokens and the tint rule above so every theme stays readable.
 - Cosmetic "analysing…" theatre over an instant computation.
+
+## Under each voice
+
+The moves above are written for the default `nerd` voice. Under `neutral` they all hold, minus the cursor, prompts, and ASCII. Under `professional` keep scale contrast, rule labels, stats, bipolar, strip, and choice cards; the stamp, ghost numeral, dotted corner, grain, canvas, and italic emphasis are switched off by `base.css`, and the primary button loses its offset shadow (`--press: 0`). Do not re-add them by hand. See `SKILL.md` for the voice table.
 
 ## Use at each dial
 

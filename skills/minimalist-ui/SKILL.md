@@ -28,13 +28,14 @@ pages, and personal sites among others. There is no default page structure.
   configuration and source to identify the stack and styling system. Match its
   conventions; never add a framework, utility CSS system, or component library it
   does not already use.
-- State the chosen dials in one line before building:
-  `TEXTURE n / DENSITY n / MOTION n`.
+- Before building, state the chosen composition archetype and dials together in one line:
+  `ARCHETYPE: <name> / TEXTURE n / DENSITY n / MOTION n / VOICE nerd|neutral|professional`.
+  Add `TYPE readable` when the body text is proportional. Choose one archetype per major page/view and never repeat an archetype within a project.
 
 ## Direction and dials
 
 Set one focal point and one primary action per view. Choose composition around the
-task, not a preset content sequence. Use monospace throughout, themed paper and
+task, not a preset content sequence. Use monospace throughout (in the default `nerd` voice; see Voice and type), themed paper and
 ink, one restrained accent, a strong dashed outer frame where it fits, dashed
 accent underlines for section titles, `*` bullets, and muted `meta` lines. Give
 buttons a dashed resting border and an inverted or subtly beveled hover. A
@@ -62,6 +63,30 @@ default canvas on docs and dashboards. Higher texture means a few more deliberat
 touches, not every effect at once. See `references/page-types.md` to calibrate by
 task.
 
+## Voice and type
+
+Voice is a separate three-way setting (`data-voice` on `<html>`) that decides how
+much terminal flavour the page keeps. The structure, themes, and UX rules never
+change. Default is `nerd`, which is everything described above. `professional` is for
+users who want this skill's structure and theming with less costume; a request for
+conventional corporate design that never asks for this look still skips the skill.
+
+| Voice | Pick it when | Type | Strokes | Motifs |
+| --- | --- | --- | --- | --- |
+| `nerd` | The user asks for nerdy, terminal, or hacker flavour, or for a personal or tool-for-developers page | Mono everywhere | Dashed frame, underline, controls | `*` bullets, `>` prompts, cursor, ASCII, canvas, stamps |
+| `neutral` | General audiences, products, docs: keep the character, lose the costume | Mono headings and labels, sans body | Solid 2px frame and underlines; dashed controls stay as the signature | Dash bullets; no cursor, prompts, or ASCII |
+| `professional` | Work tools, B2B, finance, health, or any audience that would read mono as a gimmick | Sans headings and body; mono only for small labels, keycaps, code | Solid hairline throughout; primary button has no offset shadow | Dot bullets; no canvas, ghost numerals, animated stamps, grain, or italic emphasis |
+
+Voice also governs copy: `nerd` may be dry and in-joke friendly; `neutral` is plain and
+specific; `professional` is direct and formal, with no jokes. In `neutral` and
+`professional`, treat TEXTURE as at most 5 and 3 respectively. Type is its own
+setting (`data-type`): `mono` or `readable`. `readable` keeps mono headings and
+labels and sets body copy in the system sans, which widens the audience without
+leaving the look. An explicit `data-type` always beats what a voice implies. Both
+settings persist with the theme (see `references/themes.md`); `assets/head.js`
+applies them before paint. For a standalone page, link `dist/minimalist.min.css`
+and `dist/head.js` instead of copying assets.
+
 ## Taste and visual decisions
 
 - Keep body type comfortably readable, usually at least 16px with open line
@@ -82,11 +107,12 @@ task.
   labels.
 - Use one distinctive motif tied to the task. Prefer restraint over stacking the
   frame, canvas, CRT, animation, grain, and ASCII art in one view.
-- Let scale contrast carry hierarchy: one oversized headline with one emphasised
-  word against small uppercase labels. When the content has numbers, categories,
-  or a position, draw that real data as the focal motif before reaching for
-  decoration. Colour a category only alongside a label, glyph, or outline.
-  `references/craft.md` has the full set of moves and what not to copy.
+- Choose a hero grammar for the subject, rather than defaulting to an oversized
+  headline or italic accent. When the content has numbers, categories, or a
+  position, draw that real data as the focal motif before reaching for decoration.
+  Colour a category only alongside a label, glyph, or outline.
+  `references/craft.md` has hero grammar options and craft moves;
+  `references/compositions.md` has page archetypes.
 
 ## Build in layers
 
@@ -112,11 +138,13 @@ use the CSS static fallback.
 
 1. Identify the actual page purpose, audience, content, route, and main task.
 2. Inspect the existing source, assets, styling system, and component conventions.
-3. Choose the dials, theme roles, content width, density, and one optional motif.
-4. Build hierarchy and useful static content first; keep all real actions working.
-5. Finish empty, loading, error, success, and disabled states that the flow needs.
-6. Add texture only after the core is clear; keep it removable and low-cost.
-7. Check the narrow layout, keyboard path, supported themes, and relevant states.
+3. Choose a unique archetype for each major page/view, then set the dials, theme roles, content width, density, and one optional motif. State the archetype and dials together before building.
+4. Write one sentence completing “This could only be this site because …” using a real, specific quality of its subject, audience, content, or data; use it to reject generic decoration and copy.
+5. Build hierarchy and useful static content first; keep all real actions working.
+6. Add at least one subject-driven interaction that lets people meaningfully explore, change, compare, or act on the site's actual material—not a generic decorative widget.
+7. Finish empty, loading, error, success, and disabled states that the flow needs.
+8. Add texture only after the core is clear; keep it removable and low-cost.
+9. Check the narrow layout, keyboard path, supported themes, and relevant states.
 
 ## UX rules outrank style
 
@@ -150,7 +178,8 @@ Read only the material relevant to the work. Detect the stack before opening
 | --- | --- |
 | `references/page-types.md` | Choosing composition and dials for a particular kind of page. |
 | `references/themes.md` | Selecting or adding a theme, mapping roles, or checking contrast. |
-| `references/craft.md` | Raising polish: headline scale, stat and bipolar data surfaces, segmented progress, category colour, tactile primary action, choice cards, share cards, copy voice. |
+| `references/craft.md` | Raising polish: hero grammars, headline scale, stat and bipolar data surfaces, segmented progress, category colour, tactile primary action, choice cards, share cards, copy voice. |
+| `references/compositions.md` | Choosing a distinct page archetype before building; ensure major pages/views do not repeat one within a project. |
 | `references/texture.md` | Considering the ambient canvas, ASCII, border language, micro-interactions, CRT, or Win98 details. |
 | `references/components.md` | Implementing common controls, content patterns, tables, or component states. |
 | `references/interaction-states.md` | Building forms, asynchronous feedback, menus, dialogs, keyboard behaviour, or motion. |

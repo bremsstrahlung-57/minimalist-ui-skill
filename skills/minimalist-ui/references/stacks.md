@@ -58,7 +58,7 @@ export function Ambient({ mode, colours, reducedMotion }) {
 Use a client component for the canvas; put `"use client"` at its top. The theme script stays in the server-rendered document head and runs before paint. Start the core in `useEffect`, never while rendering. `destroy()` cancels its scheduled animation frame and releases its resize observer. Keep server/client markup identical and do not read browser globals during render. The React recipe above is the client implementation; place it in a client boundary and pass the current mode, colors, and reduced-motion setting from its parent.
 
 In the server page, render the stable component boundary and pass serializable
-props. Keep the inline head script from `themes.md` in the document layout; do not
+props. Keep the head script (`assets/head.js`, see `themes.md`) in the document layout; do not
 read saved preferences during server rendering.
 
 ### Vue
@@ -215,7 +215,7 @@ Load the module after the canvas markup; keep a static CSS fallback for script-d
 </script>
 ```
 
-Keep the theme head script before paint and update colors when its selected theme changes.
+Keep `head.js` before paint. `dist/minimalist-ambient.js` auto-mounts any `canvas[data-ambient]` and already follows theme, mode, and voice changes; use `create` from `assets/ambient.js` directly only when the host needs custom lifecycle control.
 
 ### Server templates
 

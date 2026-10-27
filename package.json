@@ -1,0 +1,34 @@
+{
+  "name": "minimalist-ui",
+  "version": "0.1.0",
+  "description": "Textured-minimal agent skill with a single-file CSS build.",
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "dist",
+    "skills"
+  ],
+  "style": "dist/minimalist.min.css",
+  "author": "Sagar Sharma",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bremsstrahlung-57/minimalist-ui-skill.git"
+  },
+  "homepage": "https://github.com/bremsstrahlung-57/minimalist-ui-skill#readme",
+  "keywords": [
+    "agent-skill",
+    "css",
+    "minimal",
+    "monospace",
+    "design-tokens"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "jsdelivr": "dist/minimalist.min.css",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/build.mjs --check",
+    "prepublishOnly": "npm run check"
+  }
+}

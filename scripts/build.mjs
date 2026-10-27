@@ -1,0 +1,67 @@
+// Builds the single-file distribution from skills/minimalist-ui/assets. No dependencies.
+//   node scripts/build.mjs           write dist/ and mirror it into skills/minimalist-ui/dist/
+//   node scripts/build.mjs --check   exit 1 if either copy is stale
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+const assets = join(root, 'skills/minimalist-ui/assets');
+const dist = join(root, 'dist');
+const mirror = join(root, 'skills/minimalist-ui/dist');
+const { version } = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
+const banner = `/*! minimalist-ui v${version} | MIT */\n`;
+const read = (name) => readFileSync(join(assets, name), 'utf8').replace(/\r\n/g, '\n');
+
+// Minify only outside string literals and url(...) so content: "> " and data URIs survive byte for byte.
+function minifyCss(source) {
+  const literal = /("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|url\([^)]*\))/g;
+  return source
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .split(literal)
+    .map((part, index) => index % 2 ? part : part
+      .replace(/\s+/g, ' ')
+      .replace(/ ?([{};,]) ?/g, '$1')
+      .replace(/:\s+/g, ':')
+      .replace(/;}/g, '}'))
+    .join('')
+    .trim();
+}
+
+function stripJs(source) {
+  return source.replace(/\/\*[\s\S]*?\*\//g, '').split('\n')
+    .filter((line) => line.trim() && !/^\s*\/\//.test(line)).join('\n');
+}
+
+const css = banner + minifyCss(read('tokens.css') + '\n' + read('base.css')) + '\n';
+const head = banner + stripJs(read('head.js')) + '\n';
+const ambient = banner
+  + stripJs(read('ambient.js')).replace('export function create', 'function create') + '\n'
+  + stripJs(read('ambient-mount.js')).replace(/^import .*\n/, '').replace('export function mount', 'function mount') + '\n'
+  + 'export { create, mount };\n';
+
+const outputs = { 'minimalist.min.css': css, 'head.js': head, 'minimalist-ambient.js': ambient };
+const check = process.argv.includes('--check');
+let stale = 0;
+
+for (const directory of [dist, mirror]) {
+  mkdirSync(directory, { recursive: true });
+  for (const [name, text] of Object.entries(outputs)) {
+    const file = join(directory, name);
+    if (check) {
+      if (!existsSync(file) || readFileSync(file, 'utf8') !== text) { stale++; console.error(`stale: ${file}`); }
+    } else writeFileSync(file, text);
+  }
+  if (check) {
+    const sources = readdirSync(dist).filter((n) => n === 'example.html');
+    for (const name of sources) {
+      const copy = join(mirror, name);
+      if (directory === mirror && (!existsSync(copy) || readFileSync(copy, 'utf8') !== readFileSync(join(dist, name), 'utf8'))) { stale++; console.error(`stale: ${copy}`); }
+    }
+  } else if (directory === mirror && existsSync(join(dist, 'example.html'))) {
+    writeFileSync(join(mirror, 'example.html'), readFileSync(join(dist, 'example.html')));
+  }
+}
+
+if (check) process.exit(stale ? 1 : 0);
+for (const [name, text] of Object.entries(outputs)) console.log(`${name}  ${Buffer.byteLength(text)} bytes`);

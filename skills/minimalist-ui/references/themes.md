@@ -8,32 +8,9 @@ Included palettes are Gruvbox (default; light and dark), Tokyo Night (Night and 
 
 ## Applying before paint
 
-Put this small inline script in the document head before styles can paint. It validates saved choices, defaults to Gruvbox plus system light/dark preference, and safely handles unavailable storage. Keep the root attributes synchronous and independent of the ambient renderer.
+`assets/head.js` is the single source for the pre-paint script: load it synchronously in the document head before the stylesheet (`<script src="head.js"></script>`), or paste its contents inline. It validates every saved field, applies theme, mode, voice (`nerd`, `neutral`, `professional`) and optional type (`mono`, `readable`), defaults to Gruvbox, system light/dark, and the `nerd` voice, and handles unavailable or corrupt storage without throwing. Values authored on `<html>` (`data-theme`, `data-mode`, `data-voice`, `data-type`) act as the defaults when nothing valid is saved. Keep these root attributes synchronous and independent of the ambient renderer. The built copy lives at `dist/head.js`.
 
-```html
-<script>
-(() => {
-  const modes = {
-    gruvbox: ['light', 'dark'], 'tokyo-night': ['dark'], 'tokyo-storm': ['dark'],
-    'tokyo-day': ['light'], 'catppuccin-latte': ['light'], 'catppuccin-mocha': ['dark'],
-    'rose-pine': ['dark'], 'rose-pine-dawn': ['light'], nord: ['dark'],
-    everforest: ['light', 'dark']
-  };
-  const root = document.documentElement;
-  const system = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  try {
-    const saved = JSON.parse(localStorage.getItem('textured-minimal-theme') || '{}');
-    const theme = Object.prototype.hasOwnProperty.call(modes, saved.theme) ? saved.theme : 'gruvbox';
-    const mode = modes[theme].includes(saved.mode) ? saved.mode : (modes[theme].includes(system) ? system : modes[theme][0]);
-    root.dataset.theme = theme; root.dataset.mode = mode;
-  } catch {
-    root.dataset.theme = 'gruvbox'; root.dataset.mode = system;
-  }
-})();
-</script>
-```
-
-The picker changes family and mode, reflects the active state, and persists a JSON choice with `localStorage.setItem('textured-minimal-theme', JSON.stringify({theme, mode}))`. Save `mode: 'system'` when the user selected system-following behavior; resolve that against `matchMedia` before applying. If the system setting changes while that choice remains active, update the root mode. A storage failure must not disable the picker.
+The pickers change family, mode, voice, and type, reflect the active state, and persist one merged JSON object under `textured-minimal-theme`: `{theme, mode, voice, type}`. Read the stored value, change only your field, and write it back so one picker never erases another's choice. Omit `type` (or delete it) for "voice default". Save `mode: 'system'` when the user selected system-following behavior; resolve that against `matchMedia` before applying. If the system setting changes while that choice remains active, update the root mode. A storage failure must not disable the picker.
 
 ## Contrast is measured, not eyeballed
 
