@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" data-theme="graphite" data-mode="light" data-voice="neutral" data-type="readable">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="description" content="Eight fictional product pages built with the textured-minimal design language. All names, prices and data are placeholders." />
+    <title>Textured minimal — eight demo sites</title>
+    <script>
+      (() => {
+        const families = {
+          gruvbox: { light: 'gruvbox', dark: 'gruvbox' },
+          everforest: { light: 'everforest', dark: 'everforest' },
+          tokyo: { light: 'tokyo-day', dark: 'tokyo-night' },
+          catppuccin: { light: 'catppuccin-latte', dark: 'catppuccin-mocha' },
+          rosepine: { light: 'rose-pine-dawn', dark: 'rose-pine' },
+          nord: { light: 'nord-snow', dark: 'nord' },
+          graphite: { light: 'graphite', dark: 'graphite' },
+          atelier: { light: 'atelier', dark: 'atelier' }
+        };
+        const routes = {
+          '/': { family: 'graphite', voice: 'neutral', type: 'readable' },
+          '/landing': { family: 'everforest', voice: 'professional', type: 'readable' },
+          '/dashboard': { family: 'tokyo', voice: 'professional', type: 'readable' },
+          '/docs': { family: 'catppuccin', voice: 'neutral', type: 'readable' },
+          '/store': { family: 'rosepine', voice: 'neutral', type: 'readable' },
+          '/quiz': { family: 'gruvbox', voice: 'neutral', type: 'readable' },
+          '/portfolio': { family: 'nord', voice: 'nerd', type: 'readable' },
+          '/checkout': { family: 'graphite', voice: 'professional', type: 'readable' },
+          '/luxury': { family: 'atelier', voice: 'professional', type: 'readable' }
+        };
+        const voices = ['nerd', 'neutral', 'professional'];
+        const types = ['mono', 'readable'];
+        const root = document.documentElement;
+        const path = location.pathname.replace(/\/+$/, '') || '/';
+        const fallback = routes[path] || routes['/'];
+        const params = new URLSearchParams(location.search);
+        const saved = (() => {
+          try { return JSON.parse(localStorage.getItem('textured-minimal-theme') || '{}') || {}; }
+          catch { return {}; }
+        })();
+        const own = (object, key) => Object.prototype.hasOwnProperty.call(object, key);
+        const family = own(families, params.get('theme')) ? params.get('theme')
+          : own(families, saved.family) ? saved.family
+          : fallback.family;
+        const system = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const mode = (params.get('mode') === 'dark' || params.get('mode') === 'light') ? params.get('mode')
+          : (saved.mode === 'dark' || saved.mode === 'light') ? saved.mode
+          : system;
+        const voice = voices.includes(params.get('voice')) ? params.get('voice')
+          : voices.includes(saved.voice) ? saved.voice
+          : fallback.voice;
+        const type = types.includes(params.get('type')) ? params.get('type')
+          : types.includes(saved.type) ? saved.type
+          : fallback.type;
+        root.dataset.theme = families[family][mode];
+        root.dataset.mode = mode;
+        root.dataset.voice = voice;
+        root.dataset.type = type;
+        root.dataset.family = family;
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

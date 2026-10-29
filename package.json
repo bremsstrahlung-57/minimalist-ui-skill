@@ -5,10 +5,9 @@
   "license": "MIT",
   "type": "module",
   "files": [
-    "dist",
-    "skills"
+    "skills/minimalist-ui"
   ],
-  "style": "dist/minimalist.min.css",
+  "style": "skills/minimalist-ui/dist/minimalist.min.css",
   "author": "Sagar Sharma",
   "repository": {
     "type": "git",
@@ -25,7 +24,7 @@
   "engines": {
     "node": ">=18"
   },
-  "jsdelivr": "dist/minimalist.min.css",
+  "jsdelivr": "skills/minimalist-ui/dist/minimalist.min.css",
   "scripts": {
     "build": "node scripts/build.mjs",
     "check": "node scripts/build.mjs --check",

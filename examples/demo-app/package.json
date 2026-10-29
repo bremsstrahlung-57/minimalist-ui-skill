@@ -1,0 +1,29 @@
+{
+  "name": "textured-minimal-demos",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "precheck": "npm run build",
+    "check": "npm run check:contrast && npm run check:smoke && npm run check:screenshots",
+    "check:contrast": "node scripts/contrast-check.mjs",
+    "check:smoke": "node scripts/smoke.mjs",
+    "check:screenshots": "node scripts/screenshots.mjs"
+  },
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router-dom": "^7.18.4"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "playwright": "^1.64.1",
+    "typescript": "~6.0.3",
+    "vite": "^8.3.5"
+  }
+}

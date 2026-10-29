@@ -156,6 +156,15 @@ use the CSS static fallback.
   page colour. Status is never conveyed by colour alone.
 - Work at 390px; interactive targets are at least 40px; tables scroll in their own
   labelled container. Prevent layout shift and apply theme before paint.
+- Below 560px, put every data table inside a wrapper with `overflow-x: auto`; the
+  table scrolls within that wrapper instead of reflowing into clipped or shrunk
+  cells. Keep a visible edge cue that more columns exist.
+- Hero controls, toggles, and captions stay inside the hero's own background band at
+  every width, including layered or exploded states. Grow the band to contain them;
+  never let them spill onto the page behind it.
+- Inputs, field borders, and monograms must clear their threshold on both light and
+  dark themes, measured against the surface they actually sit on: 3:1 for large
+  monogram text and for control borders, 4.5:1 for labels and values.
 - Respect `prefers-reduced-motion`. Keep real content selectable and copyable. Do
   not invent testimonials, logos, statistics, or product facts; mark prototype
   content as placeholder.
@@ -189,6 +198,7 @@ Read only the material relevant to the work. Detect the stack before opening
 | `assets/base.css` | Using the plain CSS component and base classes as an adaptable reference. |
 | `assets/ambient.js` | Adding the framework-free ambient canvas core. |
 | `assets/starter.html` | Workspace is empty, or a runnable neutral reference is useful. |
+
 
 ## Completion check
 
