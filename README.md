@@ -2,6 +2,8 @@
 
 An agent skill for creating textured-minimal interfaces: clear layouts, themed colors, purposeful details, accessible interactions, and optional generative texture. It guides websites and apps without requiring a particular framework or template.
 
+[View the live demo](https://demo-app-eosin-phi.vercel.app/).
+
 <table>
   <tr>
     <td width="50%"><img src="assets/landing-1280-light.png" alt="Landing page in light mode" /></td>
@@ -18,6 +20,8 @@ An agent skill for creating textured-minimal interfaces: clear layouts, themed c
 ```bash
 npx skills add bremsstrahlung-57/minimalist-ui-skill
 ```
+
+Example prompt: “Use the minimalist-ui skill to build a docs site.”
 
 The skill supports three styles: `nerd` keeps terminal-inspired details, `neutral` tones them down, and `professional` uses a more conventional visual language. It can also use readable body text with monospace headings and labels.
 
