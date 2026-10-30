@@ -215,7 +215,7 @@ Load the module after the canvas markup; keep a static CSS fallback for script-d
 </script>
 ```
 
-Keep `head.js` before paint. `dist/minimalist-ambient.js` auto-mounts any `canvas[data-ambient]` and already follows theme, mode, and voice changes; use `create` from `assets/ambient.js` directly only when the host needs custom lifecycle control.
+Keep `head.js` before paint. `assets/ambient-mount.js` auto-mounts any `canvas[data-ambient]` and follows theme, mode, and voice changes; use `create` from `assets/ambient.js` directly only for custom lifecycle control.
 
 ### Server templates
 

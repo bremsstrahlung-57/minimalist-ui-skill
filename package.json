@@ -1,13 +1,12 @@
 {
   "name": "minimalist-ui",
-  "version": "0.1.0",
-  "description": "Textured-minimal agent skill with a single-file CSS build.",
+  "version": "0.2.0",
+  "description": "Textured-minimal agent skill with source CSS and JavaScript assets.",
   "license": "MIT",
   "type": "module",
   "files": [
     "skills/minimalist-ui"
   ],
-  "style": "skills/minimalist-ui/dist/minimalist.min.css",
   "author": "Sagar Sharma",
   "repository": {
     "type": "git",
@@ -23,11 +22,5 @@
   ],
   "engines": {
     "node": ">=18"
-  },
-  "jsdelivr": "skills/minimalist-ui/dist/minimalist.min.css",
-  "scripts": {
-    "build": "node scripts/build.mjs",
-    "check": "node scripts/build.mjs --check",
-    "prepublishOnly": "npm run check"
   }
 }

@@ -26,13 +26,12 @@ Example prompt: “Use the minimalist-ui skill to build a docs site for a CLI to
 - Ten composition archetypes are documented; major views use different archetypes within a project.
 - Six theme families are included: Gruvbox, Tokyo Night, Catppuccin, Rose Pine, Nord, and Everforest.
 - The optional ambient canvas has eleven modes, including Game of Life, ASCII noise, and flow fields.
-- `dist/minimalist.min.css` is a standalone stylesheet; `dist/example.html` shows it in use.
+- Source CSS and JavaScript are in `skills/minimalist-ui/assets/`; `references/example.html` shows them in use.
 - The demo has a contrast checker for theme tokens, including 4.5:1 role-pair checks and a 3:1 field-line check.
 
 ## How it works
 
-`SKILL.md` gives the design and accessibility rules and asks the agent to inspect the current project first. The agent reads relevant files from `references/` for composition, themes, texture, components, responsive layout, and stack guidance. For standalone use, `dist/` contains the built stylesheet, the pre-paint theme script, an optional ambient module, and an example page.
-
+`SKILL.md` gives the design and accessibility rules and asks the agent to inspect the current project first. The agent reads relevant files from `references/` for composition, themes, texture, components, responsive layout, and stack guidance. For standalone use, copy the source files from `skills/minimalist-ui/assets/` into the project's public/static folder.
 
 ## License
 

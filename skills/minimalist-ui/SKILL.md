@@ -84,8 +84,7 @@ setting (`data-type`): `mono` or `readable`. `readable` keeps mono headings and
 labels and sets body copy in the system sans, which widens the audience without
 leaving the look. An explicit `data-type` always beats what a voice implies. Both
 settings persist with the theme (see `references/themes.md`); `assets/head.js`
-applies them before paint. For a standalone page, link `dist/minimalist.min.css`
-and `dist/head.js` instead of copying assets.
+applies them before paint. For a standalone page, copy `assets/head.js`, `assets/tokens.css`, and `assets/base.css` into the project's public/static folder. Load `head.js` synchronously in `<head>` before the stylesheets, then link `tokens.css` first and `base.css` second. For generative backgrounds, also copy `assets/ambient.js` and `assets/ambient-mount.js` into the same folder and load `ambient-mount.js` with `<script type="module">`; serve the page over HTTP, not `file://`.
 
 ## Taste and visual decisions
 
